@@ -1,0 +1,52 @@
+{
+  "command": {
+    "run": {
+      "stream": false
+    },
+    "publish": {
+      "allowBranch": [
+        "develop",
+        "master",
+        "feature/"
+      ],
+      "conventionalCommits": true,
+      "ignoreChanges": [
+        "*.md",
+        "LICENSE",
+        "lib/",
+        "specs/",
+        "**/*.test.tsx"
+      ],
+      "loglevel": "verbose",
+      "message": "chore(release): publish",
+      "yes": true
+    },
+    "version": {
+      "allowBranch": [
+        "develop",
+        "master",
+        "feature/"
+      ],
+      "conventionalCommits": true,
+      "ignoreChanges": [
+        "*.md",
+        "LICENSE",
+        "lib/",
+        "specs/",
+        "**/*.test.tsx"
+      ],
+      "loglevel": "verbose",
+      "message": "chore(release): publish",
+      "yes": true
+    }
+  },
+  "loglevel": "error",
+  "npmClientArgs": [
+    "--no-progress",
+    "--silent"
+  ],
+  "packages": [
+    "apps/*"
+  ],
+  "version": "independent"
+}

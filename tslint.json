@@ -1,0 +1,22 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard",
+    "tslint-config-prettier",
+    "tslint-react"
+  ],
+  "jsRules": {},
+  "rules": {
+    "await-promise": true,
+    "deprecation": false,
+    "no-empty": false,
+    "no-floating-promises": true,
+    "no-unnecessary-qualifier": true,
+    "return-undefined": false,
+    "strict-type-predicates": true,
+    "space-before-function-paren": false,
+    "trailing-comma": true
+  },
+  "rulesDirectory": []
+}
