@@ -35,3 +35,4 @@ release:
   - master
   script:
   - cli-tasks ci:publish:release
+  - cli-tasks ci:deploy

@@ -74,7 +74,7 @@
     ],
     "test": [
       "[build]",
-      "nyc mocha --opts mocha.opts"
+      "lerna run test"
     ],
     "install": [
       "npm install",

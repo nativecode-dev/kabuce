@@ -13,7 +13,7 @@
       "react-scripts start"
     ],
     "test": [
-      "react-scripts test"
+      "cross-env CI=true react-scripts test --all --passWithNoTests"
     ],
     "upgrade": [
       "npm-check -y"

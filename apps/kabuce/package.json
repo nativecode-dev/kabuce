@@ -1,7 +1,7 @@
 {
   "homepage": "https://nativecode-dev.github.io/kabuce",
   "name": "@kabuce/app",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": false,
   "author": {
     "email": "opensource@nativecode.com",

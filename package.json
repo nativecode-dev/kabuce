@@ -3,10 +3,13 @@
   "private": true,
   "devDependencies": {
     "@nofrills/tasks": "^7.1.7",
+    "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "lerna": "^3.15.0",
     "npm-check": "^5.9.0",
     "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
@@ -17,6 +20,7 @@
     "build": "cli-tasks build",
     "deploy": "cli-tasks deploy",
     "lerna": "lerna",
+    "task": "cli-tasks",
     "test": "cli-tasks test",
     "upgrade": "cli-tasks upgrade"
   }
