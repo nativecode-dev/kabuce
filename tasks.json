@@ -24,7 +24,7 @@
     ],
     "ci:test": [
       "[ci:build]",
-      "nyc mocha --opts .citools/mocha.opts"
+      "lerna run test"
     ],
     "ci:install": [
       "npm ci",
