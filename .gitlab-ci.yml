@@ -14,17 +14,11 @@ cache:
   paths:
   - node_modules
 
-feature:
-  stage: test
-  only:
-  - /feature\/.*/
-  script:
-  - cli-tasks ci:test
-
-fixes:
+hotfix:
   stage: publish
   only:
-  - /fix\/.*/
+  - /feature\/.*/
+  - /hotfix\/.*/
   script:
   - cli-tasks ci:publish:canary
 
