@@ -1,0 +1,32 @@
+image: docker:dind
+
+stages:
+  - build
+
+services:
+  - docker:dind
+
+before_script:
+  - apk --update --no-cache add bash curl git grep gzip jq nodejs npm openssh-client tar
+  - echo -n $DOCKER_TOKEN | docker login -u $DOCKER_USERNAME --password-stdin
+  - source .ci-env.sh
+  - bash .citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}
+  - bash .citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}
+  - curl -sL https://github.com/digitalocean/doctl/releases/download/v1.46.0/doctl-1.46.0-linux-amd64.tar.gz | tar -xzv && mv doctl /bin
+  - curl -sLO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /bin
+  - doctl kubernetes cluster kubeconfig save nativecode
+
+refactor:
+  stage: build
+  only:
+    - master
+  script:
+    # Check for updated images
+    - kubectl config current-context
+    - npm install
+    - npm run docker
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    GIT_SUBMODULE_STRATEGY: recursive
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""

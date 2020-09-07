@@ -118,6 +118,7 @@
     "cy:open": "cypress open",
     "depcheck": "npx depcheck",
     "dev": "sapper dev",
+    "docker": "docker build -t nativecode/kabuce-appui .",
     "export": "sapper export --legacy",
     "eslint": "eslint --cache --ext .js,.ts, src",
     "eslint:dump": "eslint --print-config ./.eslintrc.json",

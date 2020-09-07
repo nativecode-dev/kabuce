@@ -1,4 +1,9 @@
 {
+  "command": {
+    "run": {
+      "stream": true
+    }
+  },
   "packages": [
     "packages/*"
   ],

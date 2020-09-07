@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "lerna run build",
+    "docker": "lerna run docker",
     "prepare": "lerna bootstrap",
     "start": "lerna run dev",
     "upgrade": "lerna run upgrade"
