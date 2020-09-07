@@ -111,7 +111,7 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "name": "kabuce-appui",
+  "name": "@nativecode/kabuce-appui",
   "scripts": {
     "build": "sapper build",
     "cy:run": "cypress run",
