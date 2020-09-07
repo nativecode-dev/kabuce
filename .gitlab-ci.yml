@@ -3,8 +3,9 @@ image: docker:dind
 stages:
   - build
   - test
-  - publish
   - release
+  - publish
+  - deploy
 
 services:
   - docker:dind
@@ -21,26 +22,41 @@ before_script:
 
 continuous:
   stage: build
-  except:
-    - develop
-    - master
   script:
-    - npm install || exit 1
+    - npm ci || exit 1
+    - $(npm bin)/lerna bootstrap
     - npm run build || exit 1
   artifacts:
     paths:
       - dist
       - node_modules
-  variables:
-    DOCKER_HOST: tcp://localhost:2375
-    GIT_SUBMODULE_STRATEGY: recursive
-    DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
 
 test:
   stage: test
   script:
     - npm test || exit 1
+
+prerelease:
+  stage: release
+  only:
+    - develop
+  script:
+    - npm run prerelease || exit
+
+release:
+  stage: release
+  only:
+    - master
+  script:
+    - npm run release || exit
+
+docker:
+  stage: publish
+  only:
+    - tags
+  script:
+    - npm ci || exit 1
+    - npm run docker:publish || exit 1
   variables:
     DOCKER_HOST: tcp://localhost:2375
     GIT_SUBMODULE_STRATEGY: recursive
