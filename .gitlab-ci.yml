@@ -2,6 +2,9 @@ image: docker:dind
 
 stages:
   - build
+  - test
+  - publish
+  - release
 
 services:
   - docker:dind
@@ -22,8 +25,22 @@ continuous:
     - develop
     - master
   script:
-    - npm install
-    - npm run docker
+    - npm install || exit 1
+    - npm run build || exit 1
+  artifacts:
+    paths:
+      - dist
+      - node_modules
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    GIT_SUBMODULE_STRATEGY: recursive
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+
+test:
+  stage: test
+  script:
+    - npm test || exit 1
   variables:
     DOCKER_HOST: tcp://localhost:2375
     GIT_SUBMODULE_STRATEGY: recursive

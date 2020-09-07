@@ -17,5 +17,5 @@
 <Header title="Recent posts" />
 
 <AsyncContent let:items action="{getPosts}">
-  <ListContent attributeHref="slug" {items} />
+  <ListContent attributeHref="slug" items="{items}" />
 </AsyncContent>

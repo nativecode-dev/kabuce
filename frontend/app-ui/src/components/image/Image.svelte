@@ -20,7 +20,7 @@
 </script>
 
 <figure>
-  <img on:click="{onClick}" {alt} {height} {src} {width} />
+  <img on:click="{onClick}" alt="{alt}" height="{height}" src="{src}" width="{width}" />
 
   {#if caption}
     <figcaption on:click="{onCaptionClick}">{caption}</figcaption>

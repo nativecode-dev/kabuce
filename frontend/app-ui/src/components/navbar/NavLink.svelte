@@ -13,7 +13,7 @@
 {#if prefetch}
   <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
       the blog data when we hover over the link or tap it on a touchscreen -->
-  <a class:selected rel="{`${prefetch}`}" {href}>{title}</a>
+  <a class:selected rel="{`${prefetch}`}" href="{href}">{title}</a>
 {:else}
-  <a class:selected="{!(icon.length > 0) && selected}" class="{icon}" {target} {href}>{title}</a>
+  <a class:selected="{!(icon.length > 0) && selected}" class="{icon}" target="{target}" href="{href}">{title}</a>
 {/if}

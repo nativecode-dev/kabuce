@@ -31,7 +31,6 @@ COPY tsconfig.json /usr/kabuce-appui/
 COPY *.config.js /usr/kabuce-appui/
 # Build
 RUN set -ex \
-  && ls -lah /usr/kabuce-appui \
   && npm ci \
   && npm run build \
   ;
@@ -43,9 +42,5 @@ RUN set -ex \
 #******************************************************************************
 FROM BASE AS FINAL
 COPY --from=BUILD /usr/kabuce-appui/__sapper__/build /usr/kabuce-appui/
-RUN set -ex \
-  && ls -lah /usr/kabuce-appui \
-  && which node \
-  ;
 EXPOSE 3000
 CMD ["/usr/local/bin/node", "index.js"]

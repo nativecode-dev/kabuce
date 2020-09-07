@@ -13,4 +13,4 @@
 
 <Header title="{status}" />
 
-<ErrorContent {error} />
+<ErrorContent error="{error}" />

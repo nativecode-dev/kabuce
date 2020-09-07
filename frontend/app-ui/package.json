@@ -1,5 +1,5 @@
 {
-  "author": "Marat Zimnurov <zimit@mail.ru>",
+  "author": "opensource@nativecode.com",
   "dependencies": {
     "cross-fetch": "^3.0.5",
     "node-crud-kit": "^1.4.0"

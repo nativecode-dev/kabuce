@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "lerna run build",
+    "depcheck": "lerna run depcheck",
     "docker": "lerna run docker",
+    "fmt": "lerna run format-and-fix",
+    "lerna": "lerna",
+    "lint": "lerna run eslint",
     "prepare": "lerna bootstrap",
     "start": "lerna run dev",
     "upgrade": "lerna run upgrade"

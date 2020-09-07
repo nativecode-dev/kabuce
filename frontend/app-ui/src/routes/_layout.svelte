@@ -12,7 +12,7 @@
   import '../styles/layout.scss'
 </script>
 
-<Nav {segment} {tabs} />
+<Nav segment="{segment}" tabs="{tabs}" />
 
 <main>
   <slot />

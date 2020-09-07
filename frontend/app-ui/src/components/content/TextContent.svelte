@@ -9,8 +9,6 @@
 
 <SlotContent>
   <p class:center>
-    {#if strong}
-      <strong>{text}</strong>
-    {:else}{text}{/if}
+    {#if strong}<strong>{text}</strong>{:else}{text}{/if}
   </p>
 </SlotContent>

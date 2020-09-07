@@ -5,5 +5,5 @@
 {#await action()}
   ...
 {:then items}
-  <slot {items} />
+  <slot items="{items}" />
 {/await}
