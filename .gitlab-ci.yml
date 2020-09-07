@@ -30,6 +30,8 @@ continuous:
     paths:
       - dist
       - node_modules
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 test:
   stage: test
