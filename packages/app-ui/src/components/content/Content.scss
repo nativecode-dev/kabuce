@@ -1,0 +1,36 @@
+.content__container {
+  @import '../../styles/list.scss';
+
+  h2 {
+    font-size: 1.4em;
+    font-weight: $text-light-bold-weight;
+  }
+
+  pre {
+    background-color: $soft-light-color;
+    box-shadow: $shadow-box;
+    padding: 0.5em;
+    border-radius: 2px;
+    overflow-x: auto;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    padding: 0;
+    display: contents;
+    align-items: unset;
+  }
+
+  p {
+    text-align: left;
+  }
+
+  p.center {
+    text-align: center;
+  }
+}

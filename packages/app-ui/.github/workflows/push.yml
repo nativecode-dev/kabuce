@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+      - master
+name: build and publish
+jobs:
+  build-and-publish:
+    name: build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm ci
+      - run: npm run eslint
+      - run: npm run stylelint
+      - run: npm run svelte:check
+      - run: npm run fontello
+      - run: cp template.env .env
+      - run: npm run build
+      - run: npm run test:headless:prod
+      - name: docker build and push
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: 9e3u2f0b1/sent-template
+          tags: latest

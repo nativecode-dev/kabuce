@@ -1,0 +1,12 @@
+ul {
+  line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 30px;
+
+  li {
+    display: list-item;
+    margin: $soft-margin;
+    width: 100%;
+  }
+}
