@@ -6,6 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "prepare": "lerna bootstrap",
+    "start": "lerna run dev",
     "upgrade": "lerna run upgrade"
   },
   "repository": {
