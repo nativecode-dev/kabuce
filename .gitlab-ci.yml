@@ -24,7 +24,6 @@ continuous:
   stage: build
   script:
     - npm ci || exit 1
-    - $(npm bin)/lerna bootstrap
     - npm run build || exit 1
   artifacts:
     paths:
@@ -37,6 +36,8 @@ test:
   stage: test
   script:
     - npm test || exit 1
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 prerelease:
   stage: release
