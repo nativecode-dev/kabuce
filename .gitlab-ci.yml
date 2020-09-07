@@ -21,7 +21,6 @@ feature/*:
   only:
     - master
   script:
-    # Check for updated images
     - kubectl config current-context
     - npm install
     - npm run docker
