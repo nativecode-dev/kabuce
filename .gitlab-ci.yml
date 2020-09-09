@@ -21,21 +21,20 @@ before_script:
   - curl -sLO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /bin
   - doctl kubernetes cluster kubeconfig save nativecode
 
-continuous:
+build:
   stage: build
+  artifacts:
+    untracked: true
   script:
     - npm ci || exit 1
     - npm run build || exit 1
-  artifacts:
-    paths:
-      - backend/api/dist
-      - frontend/app-ui/__sapper__/build
-      - node_modules
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
 test:
   stage: test
+  dependencies:
+    - build
   script:
     - npm test || exit 1
   variables:
@@ -43,11 +42,10 @@ test:
 
 feature:
   stage: tag
+  dependencies:
+    - test
   only:
     - feature/*
-  artifacts:
-    paths:
-      - .changed
   script:
     - npm -s run lerna -- changed > .changed || exit 1
     - npm -s run lerna -- version --conventional-commits --conventional-commits --no-changelog --preid $CI_COMMIT_REF_NAME --yes || exit 1
