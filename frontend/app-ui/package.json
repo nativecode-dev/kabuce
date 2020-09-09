@@ -140,6 +140,7 @@
     "stylelint:css:fix": "npm run stylelint:css --fix",
     "stylelint:scss:fix": "npm run stylelint:scss --fix",
     "svelte:check": "svelte-check",
+    "test": "npm run test:headless:dev",
     "test:headless:dev": "start-server-and-test dev http://localhost:3000 test:headless",
     "test:headless:prod": "start-server-and-test start http://localhost:3000 test:headless",
     "test:headless": "cypress run",

@@ -12,6 +12,7 @@
     "lint": "lerna run eslint",
     "prepare": "lerna bootstrap",
     "start": "lerna run dev",
+    "test": "lerna run test",
     "upgrade": "lerna run upgrade"
   },
   "repository": {

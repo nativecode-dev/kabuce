@@ -11,7 +11,8 @@
     "prettier:root:json": "prettier --write ./*.json",
     "start": "node -r module-alias/register ./dist --env=production",
     "start:dev": "nodemon",
-    "test": "nodemon --config ./spec/nodemon.json",
+    "test": "jasmine --config=spec/support/jasmine.json",
+    "test:watch": "nodemon --config ./spec/nodemon.json",
     "update:install": "npm update && npm install",
     "update:pull": "npm outdated",
     "upgrade": "npm run update:install"
