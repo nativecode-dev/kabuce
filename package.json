@@ -7,6 +7,7 @@
     "build": "lerna run build",
     "depcheck": "lerna run depcheck",
     "docker": "lerna run docker",
+    "docker:publish": "bash scripts/publish.sh",
     "fmt": "lerna run format-and-fix",
     "lerna": "lerna",
     "lint": "lerna run eslint",
