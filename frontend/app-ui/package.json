@@ -88,19 +88,16 @@
   "license": "MIT",
   "lint-staged": {
     "src/**/*.(js|ts|json)": [
-      "npm run format-and-fix",
-      "git add"
+      "npm run format-and-fix"
     ],
     "src/**/*.(svelte)": [
       "npm run svelte:check"
     ],
     "src/**/*.scss": [
-      "npm run stylelint:scss:fix",
-      "git add"
+      "npm run stylelint:scss:fix"
     ],
     "src/**/*.css": [
-      "npm run stylelint:css:fix",
-      "git add"
+      "npm run stylelint:css:fix"
     ],
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
@@ -140,7 +137,6 @@
     "stylelint:css:fix": "npm run stylelint:css --fix",
     "stylelint:scss:fix": "npm run stylelint:scss --fix",
     "svelte:check": "svelte-check",
-    "test": "npm run test:headless:dev",
     "test:headless:dev": "start-server-and-test dev http://localhost:3000 test:headless",
     "test:headless:prod": "start-server-and-test start http://localhost:3000 test:headless",
     "test:headless": "cypress run",

@@ -27,7 +27,8 @@ continuous:
     - npm run build || exit 1
   artifacts:
     paths:
-      - dist
+      - backend/api/dist
+      - frontend/app-ui/__sapper__/build
       - node_modules
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
