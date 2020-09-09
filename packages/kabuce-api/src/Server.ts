@@ -1,61 +1,39 @@
-import cookieParser from 'cookie-parser'
-import morgan from 'morgan'
-import path from 'path'
-import helmet from 'helmet'
+import * as bodyParser from "body-parser";
+import * as compress from "compression";
+import * as cookieParser from "cookie-parser";
+import * as methodOverride from "method-override";
 
-import express, { Request, Response, NextFunction } from 'express'
-import { BAD_REQUEST } from 'http-status-codes'
-import 'express-async-errors'
+import { Configuration, Inject, PlatformApplication } from "@tsed/common";
+import { GlobalAcceptMimesMiddleware } from "@tsed/platform-express";
 
-import logger from '@shared/Logger'
-import { cookieProps } from '@shared/constants'
-import BaseRouter from './routes'
+const rootDir = __dirname;
 
-// Init express
-const app = express()
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser(cookieProps.secret))
-
-// Show routes called in console during development
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
-}
-
-// Security
-if (process.env.NODE_ENV === 'production') {
-  app.use(helmet())
-}
-
-// Add APIs
-app.use('/api', BaseRouter)
-
-// Print API errors
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  logger.error(err.message, err)
-  return res.status(BAD_REQUEST).json({
-    error: err.message,
-  })
+@Configuration({
+  rootDir,
+  acceptMimes: ["application/json"],
 })
+export class Server {
+  @Inject()
+  app: PlatformApplication;
 
-const viewsDir = path.join(__dirname, 'views')
-app.set('views', viewsDir)
-const staticDir = path.join(__dirname, 'public')
-app.use(express.static(staticDir))
+  @Configuration()
+  settings: Configuration;
 
-app.get('/', (req: Request, res: Response) => {
-  res.sendFile('login.html', { root: viewsDir })
-})
-
-app.get('/users', (req: Request, res: Response) => {
-  const jwt = req.signedCookies[cookieProps.key]
-  if (!jwt) {
-    res.redirect('/')
-  } else {
-    res.sendFile('users.html', { root: viewsDir })
+  /**
+   * This method let you configure the express middleware required by your application to works.
+   * @returns {Server}
+   */
+  public $beforeRoutesInit(): void | Promise<any> {
+    this.app
+      .use(GlobalAcceptMimesMiddleware) // optional
+      .use(cookieParser())
+      .use(compress({}))
+      .use(methodOverride())
+      .use(bodyParser.json())
+      .use(
+        bodyParser.urlencoded({
+          extended: true,
+        })
+      );
   }
-})
-
-// Export express instance
-export default app
+}

@@ -1,10 +1,19 @@
-import './LoadEnv' // Must be the first import
+import { $log } from "@tsed/common";
+import { PlatformExpress } from "@tsed/platform-express";
+import { Server } from "./Server";
 
-import app from '@server'
-import logger from '@shared/Logger'
+async function bootstrap() {
+  try {
+    $log.debug("Start server...");
+    const platform = await PlatformExpress.bootstrap(Server, {
+      // extra settings
+    });
 
-// Start the server
-const port = Number(process.env.PORT || 3000)
-app.listen(port, () => {
-  logger.info(`Express server started on port: ${port}`)
-})
+    await platform.listen();
+    $log.debug("Server initialized");
+  } catch (er) {
+    $log.error(er);
+  }
+}
+
+bootstrap();
