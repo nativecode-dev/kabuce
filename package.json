@@ -12,7 +12,8 @@
     "lerna": "lerna",
     "lint": "lerna run eslint",
     "prepare": "lerna bootstrap",
-    "start": "lerna run dev",
+    "start:api": "lerna run start --scope @kabuce/api",
+    "start:app": "lerna run dev --scope @kabuce/appui",
     "test": "lerna run test",
     "upgrade": "lerna run upgrade"
   },

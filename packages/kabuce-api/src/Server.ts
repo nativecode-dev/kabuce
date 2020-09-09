@@ -1,16 +1,27 @@
+import "@tsed/ajv";
+import "@tsed/swagger";
+
 import * as bodyParser from "body-parser";
 import * as compress from "compression";
 import * as cookieParser from "cookie-parser";
 import * as methodOverride from "method-override";
 
-import { Configuration, Inject, PlatformApplication } from "@tsed/common";
 import { GlobalAcceptMimesMiddleware } from "@tsed/platform-express";
+import { Configuration, Inject, PlatformApplication } from "@tsed/common";
 
-const rootDir = __dirname;
+const root = __dirname;
 
 @Configuration({
-  rootDir,
-  acceptMimes: ["application/json"],
+  rootDir: root,
+  acceptMimes: ["application/json", "text/json"],
+  mount: { "/": [`${root}/Controllers/**/*.ts`] },
+  swagger: [{ path: "/api-docs" }],
+
+  ajv: {
+    errorFormatter: (error) =>
+      `At ${error.modelName}${error.dataPath}, value '${error.data}' ${error.message}`,
+    verbose: true,
+  },
 })
 export class Server {
   @Inject()
@@ -25,15 +36,11 @@ export class Server {
    */
   public $beforeRoutesInit(): void | Promise<any> {
     this.app
-      .use(GlobalAcceptMimesMiddleware) // optional
+      .use(GlobalAcceptMimesMiddleware)
       .use(cookieParser())
       .use(compress({}))
       .use(methodOverride())
       .use(bodyParser.json())
-      .use(
-        bodyParser.urlencoded({
-          extended: true,
-        })
-      );
+      .use(bodyParser.urlencoded({ extended: true }));
   }
 }
