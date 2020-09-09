@@ -3,7 +3,6 @@ image: docker:dind
 stages:
   - build
   - test
-  - tag
   - release
   - publish
   - deploy
@@ -41,28 +40,30 @@ test:
     GIT_SUBMODULE_STRATEGY: recursive
 
 feature:
-  stage: tag
+  stage: release
   dependencies:
     - test
   only:
     - feature/*
   script:
     - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- version --conventional-commits --conventional-commits --no-changelog --preid $CI_COMMIT_REF_NAME --yes || exit 1
+    - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --preid $CI_COMMIT_REF_NAME --yes || exit 1
 
 prerelease:
   stage: release
   only:
     - develop
   script:
-    - npm run prerelease || exit
+    - npm -s run lerna -- changed > .changed || exit 1
+    - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --preid develop --yes || exit 1
 
 release:
   stage: release
   only:
     - master
   script:
-    - npm run release || exit
+    - npm -s run lerna -- changed > .changed || exit 1
+    - npm -s run lerna -- version --conventional-commits --conventional-graduate --yes || exit 1
 
 docker:
   stage: publish
