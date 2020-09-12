@@ -12,8 +12,9 @@
     "lerna": "lerna",
     "lint": "lerna run eslint",
     "prepare": "lerna bootstrap",
+    "start": "pm2 start apps.yaml",
     "start:api": "lerna run start --scope @kabuce/api",
-    "start:app": "lerna run start --scope @kabuce/appui",
+    "start:app": "lerna run start --scope @kabuce/app",
     "test": "lerna run test",
     "upgrade": "lerna run upgrade"
   },
@@ -26,6 +27,8 @@
   "license": "MIT",
   "devDependencies": {
     "@angular/cli": "^10.1.1",
-    "lerna": "^3.22.1"
+    "@nofrills/tasks": "^11.1.0",
+    "lerna": "^3.22.1",
+    "pm2": "^4.4.1"
   }
 }

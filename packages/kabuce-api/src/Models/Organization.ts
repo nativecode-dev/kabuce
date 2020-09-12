@@ -38,7 +38,7 @@ export class Organization extends Document {
   @CollectionOf(Location)
   @Default([])
   @Property()
-  topology: Location[];
+  locations: Location[];
 
   @Property()
   verification_code: string;

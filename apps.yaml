@@ -1,0 +1,5 @@
+apps:
+  - script: npm run start:api
+    name: kabuce-api
+  - script: npm run start:app
+    name: kabuce-app

@@ -1,18 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { OrganizationAccountsService } from '../api/controllers/OrganizationAccounts';
+import { OrganizationLocationsService } from '../api/controllers/OrganizationLocations';
+import { OrganizationTemplatesService } from '../api/controllers/OrganizationTemplates';
+import { OrganizationsService } from '../api/controllers/Organizations';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, NgbModule],
+  providers: [
+    OrganizationAccountsService,
+    OrganizationLocationsService,
+    OrganizationTemplatesService,
+    OrganizationsService,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
