@@ -11,7 +11,7 @@ import {
 
 import { Document } from "./Common/Document";
 import { Constants } from "./Common/Constants";
-import { OrganizationChild } from "./OrganizationChild";
+import { Location } from "./Location";
 
 export class Organization extends Document {
   @Pattern(Constants.domain)
@@ -35,10 +35,10 @@ export class Organization extends Document {
   @Required()
   organization_title: string;
 
-  @CollectionOf(OrganizationChild)
+  @CollectionOf(Location)
   @Default([])
   @Property()
-  topology: OrganizationChild[];
+  topology: Location[];
 
   @Property()
   verification_code: string;

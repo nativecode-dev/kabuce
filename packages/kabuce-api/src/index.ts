@@ -1,16 +1,17 @@
-import { PouchORM } from "pouchorm";
+import "pouchorm";
 
 import { $log } from "@tsed/common";
 import { PlatformExpress } from "@tsed/platform-express";
 
 import { Server } from "./Server";
+import { configuration } from "./AppConfiguration";
 
 async function bootstrap() {
-  PouchORM.LOGGING = true;
+  const config = await configuration(process.env.NODE_ENV);
 
   try {
     $log.debug("Start server...");
-    const platform = await PlatformExpress.bootstrap(Server, {});
+    const platform = await PlatformExpress.bootstrap(Server, config.tsed);
 
     await platform.listen();
     $log.debug("Server initialized");

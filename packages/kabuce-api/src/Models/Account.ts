@@ -13,34 +13,34 @@ import { AccountSync } from "./AccountSync";
 import { Document } from "./Common/Document";
 
 export class Account extends Document {
+  @Description("Account Reference can be used for any purpose.")
   @MaxLength(128)
   @MinLength(8)
-  @Required()
-  @Description("Account Reference can be used for any purpose.")
   @Property()
+  @Required()
   account_reference: string;
 
   @Default(true)
   @Property()
   enabled: boolean;
 
-  @Email()
-  @Required()
   @Description("Account Owner's email.")
+  @Email()
   @Property()
+  @Required()
   owner_email: string;
 
+  @Description("Account Owner's name.")
   @MaxLength(128)
   @MinLength(8)
-  @Required()
-  @Description("Account Owner's name.")
   @Property()
+  @Required()
   owner_name: string;
 
-  @MaxLength(128)
-  @MinLength(8)
   @Default(undefined)
   @Description("Account Owner's optional legal name.")
+  @MaxLength(128)
+  @MinLength(8)
   @Property()
   owner_legal_name: string;
 

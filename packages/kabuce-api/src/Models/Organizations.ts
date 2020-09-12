@@ -1,21 +1,27 @@
 import { promises as dns } from "dns";
-import { PouchCollection, PouchModel } from "pouchorm";
+import { Inject, Injectable } from "@tsed/di";
 
-import { CreateOrganization, Organization } from "./Organization";
 import { Security } from "../Services/Security";
+import { Collection } from "./Common/Collection";
+import { AppConfiguration } from "../AppConfiguration";
+import { CreateOrganization, Organization } from "./Organization";
 
-export class Organizations extends PouchCollection<Organization> {
-  constructor() {
-    super("data/organization");
+@Injectable()
+export class Organizations extends Collection<Organization> {
+  constructor(
+    @Inject(AppConfiguration) config: AppConfiguration,
+    @Inject(Security) private readonly security: Security
+  ) {
+    super(Collection.connection_string(config, "organization"));
   }
 
-  async update(organization: CreateOrganization | Organization) {
+  async upsert(organization: CreateOrganization | Organization) {
     if (organization instanceof CreateOrganization && organization.password) {
-      const organization_password = await Security.password(
+      const organization_password = await this.security.password(
         organization.password
       );
 
-      return await this.upsert({
+      return await super.upsert({
         ...organization,
         _id: organization.domain,
         organization_password_hash: organization_password.hash,
@@ -29,7 +35,7 @@ export class Organizations extends PouchCollection<Organization> {
     const existing = await this.findById(organization.domain);
 
     if (existing) {
-      return await this.upsert({
+      return await super.upsert({
         _id: organization.domain,
         ...existing,
         ...organization,
@@ -53,9 +59,7 @@ export class Organizations extends PouchCollection<Organization> {
       "kabuce:",
       organization.organization_name,
       "=",
-      Security.string_hash(password),
+      this.security.string_hash(password),
     ].join("");
   }
 }
-
-export class OrganizationDocument extends PouchModel<Organization> {}

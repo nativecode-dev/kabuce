@@ -1,12 +1,14 @@
-import { Controller, Get } from "@tsed/common";
+import { Controller, Get, Inject } from "@tsed/common";
 
 import { Accounts } from "../Models/Accounts";
 import { Organizations } from "../Models/Organizations";
 
 @Controller("/")
 export class RootController {
-  private readonly accounts = new Accounts();
-  private readonly organizations = new Organizations();
+  constructor(
+    @Inject() private readonly accounts: Accounts,
+    @Inject() private readonly organizations: Organizations
+  ) {}
 
   @Get()
   async get() {

@@ -13,7 +13,7 @@
     "lint": "lerna run eslint",
     "prepare": "lerna bootstrap",
     "start:api": "lerna run start --scope @kabuce/api",
-    "start:app": "lerna run dev --scope @kabuce/appui",
+    "start:app": "lerna run start --scope @kabuce/appui",
     "test": "lerna run test",
     "upgrade": "lerna run upgrade"
   },
@@ -25,6 +25,7 @@
   "author": "opensource@nativecode.com",
   "license": "MIT",
   "devDependencies": {
+    "@angular/cli": "^10.1.1",
     "lerna": "^3.22.1"
   }
 }
