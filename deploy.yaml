@@ -1,0 +1,115 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: kabuce
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: cert-issuer
+spec:
+  tls:
+    - hosts:
+        - kabuce.com
+        - api.kabuce.net
+      secretName: cert-secret
+  rules:
+    - host: kabuce.com
+      http:
+        paths:
+          - backend:
+              serviceName: kabuce-app
+              servicePort: 4200
+    - host: api.kabuce.net
+      http:
+        paths:
+          - backend:
+              serviceName: kabuce-api
+              servicePort: 8080
+---
+#******************************************************************************
+# kabuce-app
+#******************************************************************************
+apiVersion: v1
+kind: Service
+metadata:
+  name: kabuce-app
+  namespace: kabuce
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: kabuce.com
+    service.beta.kubernetes.io/do-loadbalancer-hostname: kabuce.com
+  labels:
+    service: kabuce-app
+spec:
+  type: ClusterIP
+  ports:
+    - name: kabuce-app
+      port: 8080
+  selector:
+    app: kabuce-app
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kabuce-app
+  namespace: kabuce
+spec:
+  selector:
+    matchLabels:
+      app: kabuce-app
+  serviceName: kabuce-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: kabuce-app
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: kabuce-app
+          image: nativecode/kabuce-app:latest
+          ports:
+            - containerPort: 5000
+---
+#******************************************************************************
+# kabuce-api
+#******************************************************************************
+apiVersion: v1
+kind: Service
+metadata:
+  name: kabuce-api
+  namespace: kabuce
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: api.kabuce.net
+    service.beta.kubernetes.io/do-loadbalancer-hostname: api.kabuce.net
+  labels:
+    service: kabuce-api
+spec:
+  type: ClusterIP
+  ports:
+    - name: kabuce-api
+      port: 4200
+  selector:
+    app: kabuce-api
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kabuce-api
+  namespace: kabuce
+spec:
+  selector:
+    matchLabels:
+      app: kabuce-api
+  serviceName: kabuce-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: kabuce-api
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: kabuce-api
+          image: nativecode/kabuce-api:latest
+          ports:
+            - containerPort: 5000
