@@ -31,11 +31,25 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: npm-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: npm-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
+            npm-build-${{ env.cache-name }}-${{ matrix.node-version }}-
             npm-build-${{ env.cache-name }}-
             npm-build-
             npm-
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test:headless
+      - name: dependencies
+        run: npm ci
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test:headless
+      - name: kabuce-api
+        uses: actions/upload-artifact@v2
+        with:
+          name: kabuce-api
+          path: packages/kabuce-api/dist
+      - name: kabuce-app
+        uses: actions/upload-artifact@v2
+        with:
+          name: kabuce-app
+          path: packages/kabuce-app/dist
