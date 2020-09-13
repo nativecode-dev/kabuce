@@ -16,6 +16,7 @@
     "start:api": "lerna run start --scope @kabuce/api",
     "start:app": "lerna run start --scope @kabuce/app",
     "test": "lerna run test",
+    "test:headless": "lerna run test:headless",
     "upgrade": "lerna run upgrade"
   },
   "repository": {

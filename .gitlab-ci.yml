@@ -12,7 +12,6 @@ services:
 
 before_script:
   - apk --update --no-cache add bash chromium curl git grep gzip jq nodejs npm openssh-client tar
-  - export CHROME_BIN=$(which chromium)
   - echo -n $DOCKER_TOKEN | docker login -u $DOCKER_USERNAME --password-stdin
   - source .ci-env.sh
   - bash .citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}
@@ -38,7 +37,8 @@ test:
   dependencies:
     - build
   script:
-    - npm test || exit 1
+    - export CHROME_BIN=$(which chromium)
+    - npm run test:headless || exit 1
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
@@ -47,12 +47,13 @@ feature:
   artifacts:
     untracked: true
   dependencies:
+    - build
     - test
   only:
     - feature/*
   script:
     - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --preid $CI_COMMIT_REF_NAME --yes || exit 1
+    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --preid $CI_COMMIT_REF_NAME --yes || exit 1
 
 prerelease:
   stage: release
