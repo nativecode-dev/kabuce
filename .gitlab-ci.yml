@@ -1,7 +1,7 @@
 image: docker:dind
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+  key: npm
   paths:
     - .npm/
 
@@ -28,20 +28,14 @@ before_script:
 test:
   stage: test
   artifacts:
-    exclude:
-      - node_modules/
-      - packages/kabuce-api/node_modules/
-      - packages/kabuce-app/node_modules/
-    paths:
-      - packages/kabuce-api/
-      - packages/kabuce-app/
+    untracked: true
   script:
     - npm ci --cache .npm --prefer-offline || exit 1
     - npm run build || exit 1
-    - export CHROME_BIN="/usr/bin/chromium-browser"
     - npm run lint || exit 1
     - npm run test:headless || exit 1
   variables:
+    CHROME_BIN: "/usr/bin/chromium-browser"
     GIT_SUBMODULE_STRATEGY: recursive
 
 feature:
