@@ -48,8 +48,9 @@ prerelease:
   stage: release
   needs:
     - test
-  only:
-    - develop
+  rules:
+    - if: ${CI_COMMIT_REF_NAME} == "develop"
+      when: on_success
   script:
     - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --yes || exit 1
   variables:
@@ -59,8 +60,9 @@ release:
   stage: release
   needs:
     - test
-  only:
-    - master
+  rules:
+    - if: ${CI_COMMIT_REF_NAME} == "master"
+      when: on_success
   script:
     - npm -s run lerna -- publish --conventional-commits --conventional-graduate --yes || exit 1
   variables:
@@ -70,11 +72,11 @@ docker:
   stage: publish
   needs:
     - test
-  only:
-    - tags
+  rules:
+    - if: $CI_COMMIT_TAG != null
+      when: on_success
   script:
-    - npm ci || exit 1
-    - npm run docker:publish || exit 1
+    - bash scripts/publish.sh latest
   variables:
     DOCKER_HOST: tcp://localhost:2375
     GIT_SUBMODULE_STRATEGY: recursive
