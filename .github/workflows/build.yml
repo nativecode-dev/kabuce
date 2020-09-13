@@ -53,11 +53,11 @@ jobs:
       - name: kabuce-api
         uses: actions/upload-artifact@v2
         with:
-          name: kabuce-api
+          name: kabuce-api-${{ matrix.node-version }}
           path: packages/kabuce-api/dist
 
       - name: kabuce-app
         uses: actions/upload-artifact@v2
         with:
-          name: kabuce-app
+          name: kabuce-app-${{ matrix.node-version }}
           path: packages/kabuce-app/dist
