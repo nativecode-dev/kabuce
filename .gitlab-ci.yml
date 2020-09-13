@@ -18,6 +18,7 @@ before_script:
   - curl -sL https://github.com/digitalocean/doctl/releases/download/v1.46.0/doctl-1.46.0-linux-amd64.tar.gz | tar -xzv && mv doctl /bin
   - curl -sLO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /bin
   - doctl kubernetes cluster kubeconfig save nativecode
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 
 test:
   stage: test
