@@ -4,3 +4,4 @@ data/*
 !data/.gitkeep
 
 appsettings.*.json
+swagger.json
