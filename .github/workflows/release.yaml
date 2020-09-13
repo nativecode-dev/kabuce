@@ -1,8 +1,10 @@
 name: release
 on:
   push:
-    tags:
-      - "v[0-9].*"
+    branches:
+      - develop
+      - master
+      - "feature/**"
 
 jobs:
   release:
@@ -12,7 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Restore Artifacts
+      - name: Restore API Artifacts
         uses: actions/download-artifact@v2
         with:
           name: kabuce-api-12.x
+
+      - name: Restore App Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: kabuce-app-12.x
+
+      - name: test
+        run: npm test
