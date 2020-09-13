@@ -40,7 +40,7 @@ feature:
   only:
     - /^feature\/.*$/
   script:
-    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --preid ${CI_COMMIT_REF_NAME} --dist-tag ${CI_COMMIT_REF_NAME} --yes || exit 1
+    - bash scripts/publish-packages.sh canary $CI_COMMIT_REF_NAME
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
@@ -51,7 +51,7 @@ prerelease:
   only:
     - develop
   script:
-    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --yes || exit 1
+    - bash scripts/publish-packages.sh prerelease
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
@@ -62,7 +62,7 @@ release:
   only:
     - master
   script:
-    - npm -s run lerna -- publish --conventional-commits --conventional-graduate --yes || exit 1
+    - bash scripts/publish-packages.sh release
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
@@ -73,7 +73,21 @@ docker:
   only:
     - tags
   script:
-    - bash scripts/publish.sh latest
+    - bash scripts/publish-docker.sh latest || exit 1
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    GIT_SUBMODULE_STRATEGY: recursive
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+
+deploy:
+  stage: deploy
+  needs:
+    - test
+  only:
+    - tags
+  script:
+    - kubectl apply -f deploy.yaml || exit 1
   variables:
     DOCKER_HOST: tcp://localhost:2375
     GIT_SUBMODULE_STRATEGY: recursive

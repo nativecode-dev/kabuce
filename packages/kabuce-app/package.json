@@ -1,5 +1,6 @@
 {
   "name": "@kabuce/app",
+  "description": "Kabuce Web Application",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -12,6 +13,7 @@
     "lint": "prettier --loglevel silent --write '{e2e,src}/**/*.ts' && ng lint",
     "e2e": "ng e2e"
   },
+  "license": "MIT",
   "dependencies": {
     "@angular/animations": "~10.1.1",
     "@angular/common": "~10.1.1",
