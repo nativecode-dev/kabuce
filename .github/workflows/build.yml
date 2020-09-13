@@ -1,15 +1,8 @@
 name: build
-
 on:
   push:
-    branches:
-      - develop
-      - master
-      - "features/**"
-  pull_request:
-    branches:
-      - develop
-      - master
+    tags-ignore:
+      - v1.*
 
 jobs:
   build:
@@ -54,10 +47,17 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: kabuce-api-${{ matrix.node-version }}
-          path: packages/kabuce-api/dist
+          path: |
+            packages/kabuce-api/dist
+            packages/kabuce-api/package-lock.json
+            packages/kabuce-api/package.json
+            packages/kabuce-api/swagger.json
 
       - name: kabuce-app
         uses: actions/upload-artifact@v2
         with:
           name: kabuce-app-${{ matrix.node-version }}
-          path: packages/kabuce-app/dist
+          path: |
+            packages/kabuce-app/dist
+            packages/kabuce-app/package-lock.json
+            packages/kabuce-app/package.json
