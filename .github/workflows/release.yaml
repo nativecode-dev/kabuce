@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: restore-artifacts
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore Artifacts
         uses: actions/download-artifact@v2
         with:
           name: kabuce-api-12.x
