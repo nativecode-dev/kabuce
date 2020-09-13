@@ -29,10 +29,12 @@ test:
   stage: test
   artifacts:
     exclude:
-      - node_modules
-      - packages/kabuce-api/node_modules
-      - packages/kabuce-app/node_modules
-    untracked: true
+      - node_modules/
+      - packages/kabuce-api/node_modules/
+      - packages/kabuce-app/node_modules/
+    paths:
+      - packages/kabuce-api/
+      - packages/kabuce-app/
   script:
     - npm ci --cache .npm --prefer-offline || exit 1
     - npm run build || exit 1
