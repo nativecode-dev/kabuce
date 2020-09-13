@@ -1,7 +1,6 @@
 image: docker:dind
 
 stages:
-  - build
   - test
   - release
   - publish
@@ -20,23 +19,13 @@ before_script:
   - curl -sLO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /bin
   - doctl kubernetes cluster kubeconfig save nativecode
 
-build:
-  stage: build
+test:
+  stage: test
   artifacts:
     untracked: true
   script:
     - npm ci || exit 1
     - npm run build || exit 1
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
-
-test:
-  stage: test
-  artifacts:
-    untracked: true
-  dependencies:
-    - build
-  script:
     - export CHROME_BIN=$(which chromium)
     - npm run test:headless || exit 1
   variables:
@@ -47,7 +36,6 @@ feature:
   artifacts:
     untracked: true
   dependencies:
-    - build
     - test
   only:
     - feature/*
