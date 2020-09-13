@@ -28,6 +28,7 @@ test:
     - npm ci || exit 1
     - npm run build || exit 1
     - export CHROME_BIN="/usr/bin/chromium-browser"
+    - npm run lint || exit 1
     - npm run test:headless || exit 1
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
@@ -39,7 +40,6 @@ feature:
   only:
     - /^feature\/.*$/
   script:
-    - npm -s run lerna -- changed > .changed || exit 1
     - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --yes || exit 1
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
@@ -51,8 +51,7 @@ prerelease:
   only:
     - develop
   script:
-    - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --yes || exit 1
+    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --yes || exit 1
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 
@@ -63,8 +62,7 @@ release:
   only:
     - master
   script:
-    - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- version --conventional-commits --conventional-graduate --yes || exit 1
+    - npm -s run lerna -- publish --conventional-commits --conventional-graduate --yes || exit 1
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 

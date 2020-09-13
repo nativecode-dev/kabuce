@@ -10,7 +10,7 @@
     "docker:publish": "bash scripts/publish.sh",
     "fmt": "lerna run format-and-fix",
     "lerna": "lerna",
-    "lint": "lerna run eslint",
+    "lint": "lerna run lint",
     "prepare": "lerna bootstrap",
     "start": "pm2 start apps.yaml",
     "start:api": "lerna run start --scope @kabuce/api",
