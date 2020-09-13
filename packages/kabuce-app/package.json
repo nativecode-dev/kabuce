@@ -8,7 +8,7 @@
     "prebuild": "swagger-angular-generator -s ../kabuce-api/swagger.json -d src/api",
     "lerna:build": "docker build --rm -t nativecode/kabuce-app .",
     "test": "ng test",
-    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

@@ -41,7 +41,7 @@ feature:
     - feature/*
   script:
     - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --preid $CI_COMMIT_REF_NAME --yes || exit 1
+    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --preid $CI_COMMIT_REF_NAME --yes || exit 1
 
 prerelease:
   stage: release
@@ -51,7 +51,7 @@ prerelease:
     - develop
   script:
     - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --preid develop --yes || exit 1
+    - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --yes || exit 1
 
 release:
   stage: release
