@@ -33,40 +33,44 @@ test:
 
 feature:
   stage: release
-  artifacts:
-    untracked: true
   needs:
     - test
   only:
     - /^feature\/.*$/
   script:
     - npm -s run lerna -- changed > .changed || exit 1
-    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --preid $CI_COMMIT_REF_NAME --yes || exit 1
+    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --yes || exit 1
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 prerelease:
   stage: release
-  artifacts:
-    untracked: true
+  needs:
+    - test
   only:
     - develop
   script:
     - npm -s run lerna -- changed > .changed || exit 1
     - npm -s run lerna -- version --conventional-commits --conventional-prerelease --no-changelog --yes || exit 1
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 release:
   stage: release
-  artifacts:
-    untracked: true
+  needs:
+    - test
   only:
     - master
   script:
     - npm -s run lerna -- changed > .changed || exit 1
     - npm -s run lerna -- version --conventional-commits --conventional-graduate --yes || exit 1
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 docker:
   stage: publish
-  artifacts:
-    untracked: true
+  needs:
+    - test
   only:
     - tags
   script:
