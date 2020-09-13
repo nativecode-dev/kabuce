@@ -40,7 +40,7 @@ feature:
   only:
     - /^feature\/.*$/
   script:
-    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --yes || exit 1
+    - npm -s run lerna -- publish --conventional-commits --conventional-prerelease --no-changelog --canary --preid ${CI_COMMIT_REF_NAME} --dist-tag ${CI_COMMIT_REF_NAME} --yes || exit 1
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
 

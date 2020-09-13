@@ -1,0 +1,13 @@
+.cache/
+data/
+specs/
+src/
+.dockerignore
+.editorconfig
+.gitignore
+.mocharc.json
+.nyrcrc.json
+.prettierrc
+Dockerfile
+tsconfig.json
+tslint.json
