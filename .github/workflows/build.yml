@@ -20,12 +20,15 @@ jobs:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: cache
+
+      - name: Cache
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -37,17 +40,22 @@ jobs:
             npm-build-${{ env.cache-name }}-
             npm-build-
             npm-
-      - name: dependencies
+
+      - name: Dependencies
         run: npm ci
-      - name: build
+
+      - name: Build
         run: npm run build
-      - name: test
+
+      - name: Test
         run: npm run test:headless
+
       - name: kabuce-api
         uses: actions/upload-artifact@v2
         with:
           name: kabuce-api
           path: packages/kabuce-api/dist
+
       - name: kabuce-app
         uses: actions/upload-artifact@v2
         with:
