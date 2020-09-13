@@ -9,12 +9,12 @@ NAME=${2:-"canary"}
 
 case ${MODE} in
 "canary")
-    lerna publish --canary --conventional-commits --preid $NAME --dist-tag $NAME --no-changelog --yes
+    lerna publish --canary --preid $NAME --dist-tag $NAME --no-changelog
     ;;
 "prerelease")
-    lerna publish --conventional-commits --conventional-prerelease=* --dist-tag next --preid next --no-changelog --yes
+    lerna publish --conventional-prerelease=* --dist-tag next --preid next --no-changelog
     ;;
 "release")
-    lerna publish --conventional-commits --conventional-graduate --create-release gitlab --yes
+    lerna publish --conventional-graduate --create-release gitlab
     ;;
 esac
