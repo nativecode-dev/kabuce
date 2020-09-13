@@ -1,3 +1,4 @@
+.npm/
 .vscode/
 dist/
 node_modules/
