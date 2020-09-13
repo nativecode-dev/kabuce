@@ -1,5 +1,8 @@
 {
-  "extends": "tslint:recommended",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard"
+  ],
   "rulesDirectory": [
     "codelyzer"
   ],
@@ -68,11 +71,7 @@
       true,
       "single"
     ],
-    "semicolon": {
-      "options": [
-        "always"
-      ]
-    },
+    "semicolon": false,
     "space-before-function-paren": {
       "options": {
         "anonymous": "never",
@@ -148,6 +147,8 @@
       "app",
       "kebab-case"
     ],
-    "no-empty-interface": false
+    "trailing-comma": true,
+    "no-empty-interface": false,
+    "no-floating-promises": false
   }
 }

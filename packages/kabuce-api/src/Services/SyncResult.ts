@@ -1,6 +1,6 @@
-import { SyncStatus } from "./SyncStatus";
+import { SyncStatus } from './SyncStatus'
 
 export interface SyncResult {
-  error_message: null | string;
-  status: SyncStatus;
+  error_message: null | string
+  status: SyncStatus
 }

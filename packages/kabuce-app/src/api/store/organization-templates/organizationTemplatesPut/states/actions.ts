@@ -5,9 +5,9 @@
  * undefined
  */
 
-import {HttpErrorResponse} from '@angular/common/http';
-import {Action} from '@ngrx/store';
-import {OrganizationTemplatesPutParams} from '../../../../controllers/OrganizationTemplates';
+import { HttpErrorResponse } from '@angular/common/http'
+import { Action } from '@ngrx/store'
+import { OrganizationTemplatesPutParams } from '../../../../controllers/OrganizationTemplates'
 
 export enum Actions {
   START = '[OrganizationTemplates organizationTemplatesPut] Start',
@@ -16,18 +16,18 @@ export enum Actions {
 }
 
 export class Start implements Action {
-  readonly type = Actions.START;
+  readonly type = Actions.START
   constructor(public payload: OrganizationTemplatesPutParams) {}
 }
 
 export class Success implements Action {
-  readonly type = Actions.SUCCESS;
+  readonly type = Actions.SUCCESS
   constructor(public payload: string) {}
 }
 
 export class Error implements Action {
-  readonly type = Actions.ERROR;
+  readonly type = Actions.ERROR
   constructor(public payload: HttpErrorResponse) {}
 }
 
-export type OrganizationTemplatesPutAction = Start | Success | Error;
+export type OrganizationTemplatesPutAction = Start | Success | Error

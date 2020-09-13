@@ -5,16 +5,16 @@
  * undefined
  */
 
-import * as __model from '../model';
+import * as __model from '../model'
 
 export interface CreateOrganization {
-  domain: string;
+  domain: string
   /** format: email */
-  email: string;
-  organization_name: string;
-  organization_title: string;
+  email: string
+  organization_name: string
+  organization_title: string
   /** default:  */
-  topology?: __model.Location[];
-  verification_code?: string;
-  password: string;
+  locations?: __model.Location[]
+  verification_code?: string
+  password: string
 }

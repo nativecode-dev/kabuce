@@ -6,6 +6,6 @@
  */
 
 export interface ModelKey {
-  id?: string;
-  model?: object;
+  id?: string
+  model?: object
 }

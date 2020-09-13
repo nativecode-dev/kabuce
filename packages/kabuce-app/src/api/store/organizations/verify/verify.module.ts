@@ -5,17 +5,17 @@
  * undefined
  */
 
-import {NgModule} from '@angular/core';
-import {EffectsModule as NgrxEffectsModule} from '@ngrx/effects';
-import {StoreModule as NgrxStoreModule} from '@ngrx/store';
+import { NgModule } from '@angular/core'
+import { EffectsModule as NgrxEffectsModule } from '@ngrx/effects'
+import { StoreModule as NgrxStoreModule } from '@ngrx/store'
 
-import {OrganizationsService} from '../../../controllers/Organizations';
-import {FormsSharedModule} from '../../forms-shared.module';
-import {VerifyFormService} from './verify.service';
+import { OrganizationsService } from '../../../controllers/Organizations'
+import { FormsSharedModule } from '../../forms-shared.module'
+import { VerifyFormService } from './verify.service'
 
-import {VerifyEffects} from './states/effects';
-import {VerifyReducer} from './states/reducers';
-import {selectorName} from './states/reducers';
+import { VerifyEffects } from './states/effects'
+import { VerifyReducer } from './states/reducers'
+import { selectorName } from './states/reducers'
 
 @NgModule({
   imports: [
@@ -23,9 +23,6 @@ import {selectorName} from './states/reducers';
     NgrxStoreModule.forFeature(selectorName, VerifyReducer),
     NgrxEffectsModule.forFeature([VerifyEffects]),
   ],
-  providers: [
-    OrganizationsService,
-    VerifyFormService,
-  ],
+  providers: [OrganizationsService, VerifyFormService],
 })
 export class VerifyModule {}

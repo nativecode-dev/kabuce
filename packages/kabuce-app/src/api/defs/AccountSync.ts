@@ -6,5 +6,5 @@
  */
 
 export interface AccountSync {
-  account_sync_handler: string;
+  account_sync_handler: string
 }

@@ -6,6 +6,6 @@
  */
 
 export interface Location {
-  organization_name: string;
-  organization_title: string;
+  organization_name: string
+  organization_title: string
 }

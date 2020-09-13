@@ -1,5 +1,7 @@
-import { AccountSync } from "../Models/AccountSync";
+import { AccountSync } from '../Models/AccountSync'
 
 export class Sync {
-  accounts(handler: string, account: Account, account_sync: AccountSync) {}
+  accounts(handler: string, account: Account, account_sync: AccountSync) {
+    return Promise.reject()
+  }
 }

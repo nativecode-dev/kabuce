@@ -5,22 +5,22 @@
  * undefined
  */
 
-import * as __model from '../model';
+import * as __model from '../model'
 
 export interface Account {
   /** Account Reference can be used for any purpose. */
-  account_reference: string;
+  account_reference: string
   /** default: true */
-  enabled?: boolean;
+  enabled?: boolean
   /**
    * Account Owner's email.
    * format: email
    */
-  owner_email: string;
+  owner_email: string
   /** Account Owner's name. */
-  owner_name: string;
+  owner_name: string
   /** Account Owner's optional legal name. */
-  owner_legal_name?: string;
+  owner_legal_name?: string
   /** default:  */
-  sync?: __model.AccountSync[];
+  sync?: __model.AccountSync[]
 }

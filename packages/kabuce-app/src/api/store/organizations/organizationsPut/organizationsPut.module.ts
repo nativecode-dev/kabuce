@@ -5,17 +5,17 @@
  * undefined
  */
 
-import {NgModule} from '@angular/core';
-import {EffectsModule as NgrxEffectsModule} from '@ngrx/effects';
-import {StoreModule as NgrxStoreModule} from '@ngrx/store';
+import { NgModule } from '@angular/core'
+import { EffectsModule as NgrxEffectsModule } from '@ngrx/effects'
+import { StoreModule as NgrxStoreModule } from '@ngrx/store'
 
-import {OrganizationsService} from '../../../controllers/Organizations';
-import {FormsSharedModule} from '../../forms-shared.module';
-import {OrganizationsPutFormService} from './organizationsPut.service';
+import { OrganizationsService } from '../../../controllers/Organizations'
+import { FormsSharedModule } from '../../forms-shared.module'
+import { OrganizationsPutFormService } from './organizationsPut.service'
 
-import {OrganizationsPutEffects} from './states/effects';
-import {OrganizationsPutReducer} from './states/reducers';
-import {selectorName} from './states/reducers';
+import { OrganizationsPutEffects } from './states/effects'
+import { OrganizationsPutReducer } from './states/reducers'
+import { selectorName } from './states/reducers'
 
 @NgModule({
   imports: [
@@ -23,9 +23,6 @@ import {selectorName} from './states/reducers';
     NgrxStoreModule.forFeature(selectorName, OrganizationsPutReducer),
     NgrxEffectsModule.forFeature([OrganizationsPutEffects]),
   ],
-  providers: [
-    OrganizationsService,
-    OrganizationsPutFormService,
-  ],
+  providers: [OrganizationsService, OrganizationsPutFormService],
 })
 export class OrganizationsPutModule {}

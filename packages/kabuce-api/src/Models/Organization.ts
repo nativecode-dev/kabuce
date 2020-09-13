@@ -1,50 +1,41 @@
-import {
-  Property,
-  Required,
-  MaxLength,
-  MinLength,
-  CollectionOf,
-  Default,
-  Pattern,
-  Email,
-} from "@tsed/common";
+import { Property, Required, MaxLength, MinLength, CollectionOf, Default, Pattern, Email } from '@tsed/common'
 
-import { Document } from "./Common/Document";
-import { Constants } from "./Common/Constants";
-import { Location } from "./Location";
+import { Document } from './Common/Document'
+import { Constants } from './Common/Constants'
+import { Location } from './Location'
 
 export class Organization extends Document {
   @Pattern(Constants.domain)
   @Property()
   @Required()
-  domain: string;
+  domain: string
 
   @Email()
   @Property()
   @Required()
-  email: string;
+  email: string
 
   @Pattern(Constants.slug)
   @Property()
   @Required()
-  organization_name: string;
+  organization_name: string
 
   @MaxLength(256)
   @MinLength(8)
   @Property()
   @Required()
-  organization_title: string;
+  organization_title: string
 
   @CollectionOf(Location)
   @Default([])
   @Property()
-  locations: Location[];
+  locations: Location[]
 
   @Property()
-  verification_code: string;
+  verification_code: string
 
-  organization_password_hash: string;
-  verified: boolean | undefined;
+  organization_password_hash: string
+  verified: boolean | undefined
 }
 
 export class CreateOrganization extends Organization {

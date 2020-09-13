@@ -1,3 +1,3 @@
 export abstract class Document {
-  _id: string;
+  _id: string
 }

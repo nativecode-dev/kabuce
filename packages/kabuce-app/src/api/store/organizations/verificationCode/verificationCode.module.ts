@@ -5,17 +5,17 @@
  * undefined
  */
 
-import {NgModule} from '@angular/core';
-import {EffectsModule as NgrxEffectsModule} from '@ngrx/effects';
-import {StoreModule as NgrxStoreModule} from '@ngrx/store';
+import { NgModule } from '@angular/core'
+import { EffectsModule as NgrxEffectsModule } from '@ngrx/effects'
+import { StoreModule as NgrxStoreModule } from '@ngrx/store'
 
-import {OrganizationsService} from '../../../controllers/Organizations';
-import {FormsSharedModule} from '../../forms-shared.module';
-import {VerificationCodeFormService} from './verificationCode.service';
+import { OrganizationsService } from '../../../controllers/Organizations'
+import { FormsSharedModule } from '../../forms-shared.module'
+import { VerificationCodeFormService } from './verificationCode.service'
 
-import {VerificationCodeEffects} from './states/effects';
-import {VerificationCodeReducer} from './states/reducers';
-import {selectorName} from './states/reducers';
+import { VerificationCodeEffects } from './states/effects'
+import { VerificationCodeReducer } from './states/reducers'
+import { selectorName } from './states/reducers'
 
 @NgModule({
   imports: [
@@ -23,9 +23,6 @@ import {selectorName} from './states/reducers';
     NgrxStoreModule.forFeature(selectorName, VerificationCodeReducer),
     NgrxEffectsModule.forFeature([VerificationCodeEffects]),
   ],
-  providers: [
-    OrganizationsService,
-    VerificationCodeFormService,
-  ],
+  providers: [OrganizationsService, VerificationCodeFormService],
 })
 export class VerificationCodeModule {}

@@ -1,6 +1,4 @@
-import { Controller } from "@tsed/common";
+import { Controller } from '@tsed/common'
 
-@Controller("/")
-export class RootController {
-  constructor() {}
-}
+@Controller('/')
+export class RootController {}

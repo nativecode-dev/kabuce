@@ -5,9 +5,9 @@
  * undefined
  */
 
-import {HttpErrorResponse} from '@angular/common/http';
-import {Action} from '@ngrx/store';
-import * as __model from '../../../../model';
+import { HttpErrorResponse } from '@angular/common/http'
+import { Action } from '@ngrx/store'
+import * as __model from '../../../../model'
 
 export enum Actions {
   START = '[Organizations organizationsAll] Start',
@@ -16,18 +16,18 @@ export enum Actions {
 }
 
 export class Start implements Action {
-  readonly type = Actions.START;
+  readonly type = Actions.START
   constructor() {}
 }
 
 export class Success implements Action {
-  readonly type = Actions.SUCCESS;
+  readonly type = Actions.SUCCESS
   constructor(public payload: __model.Organization[]) {}
 }
 
 export class Error implements Action {
-  readonly type = Actions.ERROR;
+  readonly type = Actions.ERROR
   constructor(public payload: HttpErrorResponse) {}
 }
 
-export type OrganizationsAllAction = Start | Success | Error;
+export type OrganizationsAllAction = Start | Success | Error

@@ -5,6 +5,4 @@
  * undefined
  */
 
-export interface Organizations {
-
-}
+export interface Organizations {}

@@ -5,17 +5,17 @@
  * undefined
  */
 
-import {NgModule} from '@angular/core';
-import {EffectsModule as NgrxEffectsModule} from '@ngrx/effects';
-import {StoreModule as NgrxStoreModule} from '@ngrx/store';
+import { NgModule } from '@angular/core'
+import { EffectsModule as NgrxEffectsModule } from '@ngrx/effects'
+import { StoreModule as NgrxStoreModule } from '@ngrx/store'
 
-import {OrganizationAccountsService} from '../../../controllers/OrganizationAccounts';
-import {FormsSharedModule} from '../../forms-shared.module';
-import {OrganizationAccountsPutFormService} from './organizationAccountsPut.service';
+import { OrganizationAccountsService } from '../../../controllers/OrganizationAccounts'
+import { FormsSharedModule } from '../../forms-shared.module'
+import { OrganizationAccountsPutFormService } from './organizationAccountsPut.service'
 
-import {OrganizationAccountsPutEffects} from './states/effects';
-import {OrganizationAccountsPutReducer} from './states/reducers';
-import {selectorName} from './states/reducers';
+import { OrganizationAccountsPutEffects } from './states/effects'
+import { OrganizationAccountsPutReducer } from './states/reducers'
+import { selectorName } from './states/reducers'
 
 @NgModule({
   imports: [
@@ -23,9 +23,6 @@ import {selectorName} from './states/reducers';
     NgrxStoreModule.forFeature(selectorName, OrganizationAccountsPutReducer),
     NgrxEffectsModule.forFeature([OrganizationAccountsPutEffects]),
   ],
-  providers: [
-    OrganizationAccountsService,
-    OrganizationAccountsPutFormService,
-  ],
+  providers: [OrganizationAccountsService, OrganizationAccountsPutFormService],
 })
 export class OrganizationAccountsPutModule {}

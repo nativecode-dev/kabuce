@@ -5,16 +5,16 @@
  * undefined
  */
 
-import {NgModule} from '@angular/core';
-import {EffectsModule as NgrxEffectsModule} from '@ngrx/effects';
-import {StoreModule as NgrxStoreModule} from '@ngrx/store';
+import { NgModule } from '@angular/core'
+import { EffectsModule as NgrxEffectsModule } from '@ngrx/effects'
+import { StoreModule as NgrxStoreModule } from '@ngrx/store'
 
-import {OrganizationsService} from '../../../controllers/Organizations';
-import {FormsSharedModule} from '../../forms-shared.module';
+import { OrganizationsService } from '../../../controllers/Organizations'
+import { FormsSharedModule } from '../../forms-shared.module'
 
-import {OrganizationsAllEffects} from './states/effects';
-import {OrganizationsAllReducer} from './states/reducers';
-import {selectorName} from './states/reducers';
+import { OrganizationsAllEffects } from './states/effects'
+import { OrganizationsAllReducer } from './states/reducers'
+import { selectorName } from './states/reducers'
 
 @NgModule({
   imports: [
@@ -22,8 +22,6 @@ import {selectorName} from './states/reducers';
     NgrxStoreModule.forFeature(selectorName, OrganizationsAllReducer),
     NgrxEffectsModule.forFeature([OrganizationsAllEffects]),
   ],
-  providers: [
-    OrganizationsService,
-  ],
+  providers: [OrganizationsService],
 })
 export class OrganizationsAllModule {}

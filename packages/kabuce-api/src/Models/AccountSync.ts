@@ -1,5 +1,5 @@
-import { Document } from "./Common/Document";
-import { Required, Property, MaxLength } from "@tsed/common";
+import { Document } from './Common/Document'
+import { Required, Property, MaxLength } from '@tsed/common'
 
 export class AccountSync extends Document {
   @MaxLength(256)

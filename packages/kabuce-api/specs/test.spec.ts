@@ -1,5 +1,5 @@
-import "mocha";
+import 'mocha'
 
-describe("when using api", () => {
-  it("should do stuff", () => {});
-});
+describe('when using api', () => {
+  it('should do stuff', () => {})
+})

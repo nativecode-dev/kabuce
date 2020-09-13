@@ -1,9 +1,9 @@
-import { Property } from "@tsed/common";
+import { Property } from '@tsed/common'
 
 export class ModelKey<T> {
   @Property()
-  id: string;
+  id: string
 
   @Property()
-  model: T;
+  model: T
 }

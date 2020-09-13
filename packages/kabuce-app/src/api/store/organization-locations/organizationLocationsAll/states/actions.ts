@@ -5,10 +5,10 @@
  * undefined
  */
 
-import {HttpErrorResponse} from '@angular/common/http';
-import {Action} from '@ngrx/store';
-import {OrganizationLocationsAllParams} from '../../../../controllers/OrganizationLocations';
-import * as __model from '../../../../model';
+import { HttpErrorResponse } from '@angular/common/http'
+import { Action } from '@ngrx/store'
+import { OrganizationLocationsAllParams } from '../../../../controllers/OrganizationLocations'
+import * as __model from '../../../../model'
 
 export enum Actions {
   START = '[OrganizationLocations organizationLocationsAll] Start',
@@ -17,18 +17,18 @@ export enum Actions {
 }
 
 export class Start implements Action {
-  readonly type = Actions.START;
+  readonly type = Actions.START
   constructor(public payload: OrganizationLocationsAllParams) {}
 }
 
 export class Success implements Action {
-  readonly type = Actions.SUCCESS;
+  readonly type = Actions.SUCCESS
   constructor(public payload: __model.Location[]) {}
 }
 
 export class Error implements Action {
-  readonly type = Actions.ERROR;
+  readonly type = Actions.ERROR
   constructor(public payload: HttpErrorResponse) {}
 }
 
-export type OrganizationLocationsAllAction = Start | Success | Error;
+export type OrganizationLocationsAllAction = Start | Success | Error

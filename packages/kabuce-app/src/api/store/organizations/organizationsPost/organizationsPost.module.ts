@@ -5,17 +5,17 @@
  * undefined
  */
 
-import {NgModule} from '@angular/core';
-import {EffectsModule as NgrxEffectsModule} from '@ngrx/effects';
-import {StoreModule as NgrxStoreModule} from '@ngrx/store';
+import { NgModule } from '@angular/core'
+import { EffectsModule as NgrxEffectsModule } from '@ngrx/effects'
+import { StoreModule as NgrxStoreModule } from '@ngrx/store'
 
-import {OrganizationsService} from '../../../controllers/Organizations';
-import {FormsSharedModule} from '../../forms-shared.module';
-import {OrganizationsPostFormService} from './organizationsPost.service';
+import { OrganizationsService } from '../../../controllers/Organizations'
+import { FormsSharedModule } from '../../forms-shared.module'
+import { OrganizationsPostFormService } from './organizationsPost.service'
 
-import {OrganizationsPostEffects} from './states/effects';
-import {OrganizationsPostReducer} from './states/reducers';
-import {selectorName} from './states/reducers';
+import { OrganizationsPostEffects } from './states/effects'
+import { OrganizationsPostReducer } from './states/reducers'
+import { selectorName } from './states/reducers'
 
 @NgModule({
   imports: [
@@ -23,9 +23,6 @@ import {selectorName} from './states/reducers';
     NgrxStoreModule.forFeature(selectorName, OrganizationsPostReducer),
     NgrxEffectsModule.forFeature([OrganizationsPostEffects]),
   ],
-  providers: [
-    OrganizationsService,
-    OrganizationsPostFormService,
-  ],
+  providers: [OrganizationsService, OrganizationsPostFormService],
 })
 export class OrganizationsPostModule {}

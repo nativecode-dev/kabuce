@@ -5,30 +5,30 @@
  * undefined
  */
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
 
-import * as __model from '../model';
+import * as __model from '../model'
 
 export interface OrganizationAccountsAllParams {
-  organization_id: string;
+  organization_id: string
 }
 
 export interface OrganizationAccountsPostParams {
-  organization_id: string;
-  body?: __model.Account;
+  organization_id: string
+  body?: __model.Account
 }
 
 export interface OrganizationAccountsGetParams {
-  organization_id: string;
-  account_id: string;
+  organization_id: string
+  account_id: string
 }
 
 export interface OrganizationAccountsPutParams {
-  organization_id: string;
-  account_id: string;
-  body?: __model.Account;
+  organization_id: string
+  account_id: string
+  body?: __model.Account
 }
 
 @Injectable()
@@ -39,18 +39,18 @@ export class OrganizationAccountsService {
   organizationAccountsAll(params: OrganizationAccountsAllParams): Observable<__model.Account[]> {
     const pathParams = {
       organization_id: params.organization_id,
-    };
-    return this.http.get<__model.Account[]>(`/orgs/${pathParams.organization_id}/accounts`);
+    }
+    return this.http.get<__model.Account[]>(`/orgs/${pathParams.organization_id}/accounts`)
   }
 
   /** http://undefined/swagger/swagger-ui.html#!/OrganizationAccounts/OrganizationAccounts.post */
   organizationAccountsPost(params: OrganizationAccountsPostParams): Observable<__model.ModelKey> {
     const pathParams = {
       organization_id: params.organization_id,
-    };
-    const bodyParams = params.body;
+    }
+    const bodyParams = params.body
 
-    return this.http.post<__model.ModelKey>(`/orgs/${pathParams.organization_id}/accounts`, bodyParams || {});
+    return this.http.post<__model.ModelKey>(`/orgs/${pathParams.organization_id}/accounts`, bodyParams || {})
   }
 
   /** http://undefined/swagger/swagger-ui.html#!/OrganizationAccounts/OrganizationAccounts.get */
@@ -58,8 +58,8 @@ export class OrganizationAccountsService {
     const pathParams = {
       organization_id: params.organization_id,
       account_id: params.account_id,
-    };
-    return this.http.get<void>(`/orgs/${pathParams.organization_id}/accounts/${pathParams.account_id}`);
+    }
+    return this.http.get<void>(`/orgs/${pathParams.organization_id}/accounts/${pathParams.account_id}`)
   }
 
   /** http://undefined/swagger/swagger-ui.html#!/OrganizationAccounts/OrganizationAccounts.put */
@@ -67,9 +67,12 @@ export class OrganizationAccountsService {
     const pathParams = {
       organization_id: params.organization_id,
       account_id: params.account_id,
-    };
-    const bodyParams = params.body;
+    }
+    const bodyParams = params.body
 
-    return this.http.put<__model.ModelKey>(`/orgs/${pathParams.organization_id}/accounts/${pathParams.account_id}`, bodyParams || {});
+    return this.http.put<__model.ModelKey>(
+      `/orgs/${pathParams.organization_id}/accounts/${pathParams.account_id}`,
+      bodyParams || {},
+    )
   }
 }

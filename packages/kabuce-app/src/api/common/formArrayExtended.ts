@@ -1,15 +1,15 @@
-import {AbstractControl, FormArray} from '@angular/forms';
-import {ControlFactory} from './utils';
+import { AbstractControl, FormArray } from '@angular/forms'
+import { ControlFactory } from './utils'
 
 /** Extends FormArray so it contains definition of items for further creation */
 export class FormArrayExtended extends FormArray {
   constructor(public createControl: ControlFactory, controls: AbstractControl[], ...rest: any[]) {
-    super(controls, ...rest);
+    super(controls, ...rest)
   }
 
-  setValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
-    this.setSize(value.length);
-    super.setValue(value, options);
+  setValue(value: any[], options: { onlySelf?: boolean; emitEvent?: boolean } = {}): void {
+    this.setSize(value.length)
+    super.setValue(value, options)
   }
 
   /**
@@ -17,7 +17,7 @@ export class FormArrayExtended extends FormArray {
    * @param size of the array
    */
   setSize(size: number) {
-    while (size < this.controls.length) this.removeAt(0);
-    while (size > this.controls.length) this.push(this.createControl());
+    while (size < this.controls.length) this.removeAt(0)
+    while (size > this.controls.length) this.push(this.createControl())
   }
 }
