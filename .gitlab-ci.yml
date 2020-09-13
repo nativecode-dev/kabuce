@@ -19,10 +19,26 @@ before_script:
   - curl -sLO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /bin
   - doctl kubernetes cluster kubeconfig save nativecode
 
+continuous:
+  stage: test
+  artifacts:
+    untracked: true
+  script:
+    - npm ci || exit 1
+    - npm run build || exit 1
+    - export CHROME_BIN="/usr/bin/chromium-browser"
+    - npm run test:headless || exit 1
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+
 test:
   stage: test
   artifacts:
     untracked: true
+  only:
+    - feature/*
+    - master
+    - develop
   script:
     - npm ci || exit 1
     - npm run build || exit 1
